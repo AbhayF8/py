@@ -28,8 +28,14 @@
 
 int global=5;
 int fx1(int a) {
+	int global=1;
 	int b1=8,b2=2;
+	printf("The address of local variable global of fx1 is %p\n\n",&global);
 	return b1+global+b2;
+}
+
+void printglobal() {
+	printf("\nThe address of global variable global is %p",&global);
 }
 int fx2() {
 	static int a1;
@@ -43,12 +49,13 @@ int main() {
 	global=99;
 	printf("The value of fx1 is %d\n",fx1(a));
 	printf("The value of a is %d\n",a);
+	printf("The address of local variable global of main is %p\n\n",&global);
 	printf("The value of global is %d\n",global); //local is preffered
 	int b=fx2();
 	b=fx2();
 	b=fx2();
-	printf("Value of b is %d",b);
-	
+	printf("Value of b is %d\n",b);
+	printglobal();
 	// static a2=fx1(a);
 	// printf("Value of a2 is %d",a2);
 
