@@ -74,7 +74,8 @@ int s() {
 }
 int l(int a,int b) {
 	//auto int sum=a+b;
-	extern int sum; //same as no extern and returning sum
+	extern int sum;
+	sum=5; // This changes the value of global sum due to use of extern
 	return sum;
 }
 int main() {
@@ -85,5 +86,6 @@ int main() {
 	myVar=s();
 	myVar=s();
 	myVar=s();
-	printf("%d",myVar);
+	printf("%d\n",myVar);
+	printf("Value of Variable sum is %d",sum);
 }
