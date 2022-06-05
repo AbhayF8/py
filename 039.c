@@ -8,7 +8,7 @@ int GenRandNo(int a) {
 }
 
 int main() {
-	//printf("Generating random no. between 0 to 3 -> %d",GenRandNo(3));
+	//printf("Generating random no. between 0 to 2 -> %d",GenRandNo(3));
 	char name[10];
 	int a,user,uscore=0,cscore=0,rock=0,paper=1,scissor=2;
 	printf("Enter your name\n");
@@ -17,7 +17,8 @@ int main() {
 		printf("Round %d\nEnter \n1. Rock\n2. Paper\n3. Scissor\n",i+1);
 		scanf("%d",&user);
 		user--;
-		a=GenRandNo(2);
+		a=GenRandNo(3);
+        printf("Computer choosed %d\n",a+1);
 		if(user==a) {
 			printf("Draw\n\n");
 		}
