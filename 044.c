@@ -19,12 +19,16 @@ int main() {
 		for (int j=0;j<n1;j++) {
 			printf("Enter the element at row %d coloumn %d of Matrix 1\n",i+1,j+1);
 			scanf("%d",&matrix1[j][i]);
+			printf("%d\n",matrix1[j][i]);
+			printf("%d\n",&matrix1[j][i]);
 		}
 	}
 	for (int i=0;i<m2;i++) {
 		for (int j=0;j<n2;j++) {
 			printf("Enter the element at row %d column %d of Matrix 2\n",i+1,j+1);
 			scanf("%d",&matrix2[j][i]);
+			printf("%d\n",matrix2[j][i]);
+			printf("%d\n",&matrix2[j][i]);
 		}
 	}
 
@@ -68,9 +72,12 @@ int main() {
 		printf("|\n|");
 	}
 	
+	printf("The size of Matrix 1 is %d\n",sizeof(matrix1));
+	printf("The size of Matrix 2 is %d\n",sizeof(matrix2));
+	
 	// Multiplying the matrices
 	int m3,n3;
-	int matrix3[m3][n3];
+	//int matrix3[m3][n3];
 	if (n1==m2) {
 		printf("The multiplication gives the following matrix\n");
 	}
