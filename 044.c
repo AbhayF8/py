@@ -1,5 +1,43 @@
 #include <stdio.h>
+static int times;
 
+void altprintMatrix(int a,int b, int x[a][b]) {
+	extern int times;
+	for (int i=0;i<a;i++) {
+		for (int j=0;j<b;j++) {
+			printf("The element at row %d and column %d of Matrix %d is %d\n",i+1,j+1,times,x[j][i]);
+		}
+	}
+}
+
+void printMatrix(int a,int b,int x[a][b]) {
+	extern int times;
+	times++;
+	printf("\nMatrix %d\n",times);
+	printf("|");
+	for (int i=0;i<a;i++) {
+		for (int j=0;j<b;j++) {
+			printf(" %d ",x[j][i]);
+		}
+		if (i==a-1) {
+			printf("|\n");
+		}
+		else 
+		printf("|\n|");
+	}
+}
+
+int takeinput(int a,int b, int x[a][b]) {
+	extern int times;
+	times++;
+	for (int i=0;i<a;i++) {
+		for (int j=0;j<b;j++) {
+			printf("Enter the element at row %d coloumn %d of Matrix %d\n",i+1,j+1,times);
+			scanf("%d",&x[j][i]);
+		}
+	}
+	return x[a][b];
+}
 
 int main() {
 	int m1,n1,m2,n2;
@@ -15,69 +53,27 @@ int main() {
 	int matrix1[m1][n1];
 	int matrix2[m2][n2];
 	
-	for (int i=0;i<m1;i++) {
-		for (int j=0;j<n1;j++) {
-			printf("Enter the element at row %d coloumn %d of Matrix 1\n",i+1,j+1);
-			scanf("%d",&matrix1[j][i]);
-			printf("%d\n",matrix1[j][i]);
-			printf("%d\n",&matrix1[j][i]);
-		}
-	}
-	for (int i=0;i<m2;i++) {
-		for (int j=0;j<n2;j++) {
-			printf("Enter the element at row %d column %d of Matrix 2\n",i+1,j+1);
-			scanf("%d",&matrix2[j][i]);
-			printf("%d\n",matrix2[j][i]);
-			printf("%d\n",&matrix2[j][i]);
-		}
-	}
-
-	for (int i=0;i<m1;i++) {
-		for (int j=0;j<n1;j++) {
-			printf("The element at row %d and column %d of Matrix 1 is %d\n",i+1,j+1,matrix1[j][i]);
-		}
-	}
+	takeinput(m1,n1,matrix1);
+	takeinput(m2,n2,matrix2);
 	
-	for (int i=0;i<m2;i++) {
-		for (int j=0;j<n2;j++) {
-			printf("The element at row %d and column %d of Matrix 2 is %d\n",i+1,j+1,matrix2[j][i]);
-		}
-	}
+	// altprintMatrix(m1,n1,matrix1);
+	
+	// altprintMatrix(m2,n2,matrix2);
 	
 	// Matrix 1 
-	printf("\nMatrix 1\n");
-	printf("|");
-	for (int i=0;i<m1;i++) {
-		for (int j=0;j<n1;j++) {
-			printf(" %d ",matrix1[j][i]);
-		}
-		if (i==m1-1) {
-			printf("|\n");
-		}
-		else 
-		printf("|\n|");
-	}
+	printMatrix(m1,n1,matrix1);
 		
 	// Matrix 2 
-	printf("\nMatrix 2\n");
-	printf("|");
-	for (int i=0;i<m2;i++) {
-		for (int j=0;j<n2;j++) {
-			printf(" %d ",matrix2[j][i]);
-		}
-		if (i==m2-1) {
-			printf("|\n");
-		}
-		else 
-		printf("|\n|");
-	}
+	printMatrix(m2,n2,matrix2);
 	
-	printf("The size of Matrix 1 is %d\n",sizeof(matrix1));
-	printf("The size of Matrix 2 is %d\n",sizeof(matrix2));
+	printf("The size of Matrix 1 is %lu\n",sizeof(matrix1));
+	printf("The size of Matrix 2 is %lu\n",sizeof(matrix2));
 	
 	// Multiplying the matrices
 	int m3,n3;
-	//int matrix3[m3][n3];
+	m3=m1;
+	n3=n2;
+	int matrix3[m3][n3];
 	if (n1==m2) {
 		printf("The multiplication gives the following matrix\n");
 	}
