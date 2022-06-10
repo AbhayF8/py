@@ -5,7 +5,7 @@ void altprintMatrix(int a,int b, int x[a][b]) {
 	extern int times;
 	for (int i=0;i<a;i++) {
 		for (int j=0;j<b;j++) {
-			printf("The element at row %d and column %d of Matrix %d is %d\n",i+1,j+1,times,x[j][i]);
+			printf("The element at row %d and column %d of Matrix %d is %d\n",i+1,j+1,times,x[i][j]);
 		}
 	}
 }
@@ -17,7 +17,7 @@ void printMatrix(int a,int b,int x[a][b]) {
 	printf("|");
 	for (int i=0;i<a;i++) {
 		for (int j=0;j<b;j++) {
-			printf(" %d ",x[j][i]);
+			printf(" %d ",x[i][j]);
 		}
 		if (i==a-1) {
 			printf("|\n");
@@ -33,7 +33,7 @@ int takeinput(int a,int b, int x[a][b]) {
 	for (int i=0;i<a;i++) {
 		for (int j=0;j<b;j++) {
 			printf("Enter the element at row %d coloumn %d of Matrix %d\n",i+1,j+1,times);
-			scanf("%d",&x[j][i]);
+			scanf("%d",&x[i][j]);
 		}
 	}
 	return x[a][b];
@@ -70,12 +70,22 @@ int main() {
 	printf("The size of Matrix 2 is %lu\n",sizeof(matrix2));
 	
 	// Multiplying the matrices
-	int m3,n3;
+	int m3,n3,sum=0;
 	m3=m1;
 	n3=n2;
 	int matrix3[m3][n3];
 	if (n1==m2) {
 		printf("The multiplication gives the following matrix\n");
+		for (int i=0;i<m3;i++) {
+			for (int j=0;j<n3;j++) {
+				for (int k=0;k<m3;k++) {
+					sum+=matrix1[i][k]*matrix2[k][j];
+				}
+				matrix3[i][j]=sum;
+				sum=0;
+			}
+		}
+		printMatrix(m3,n3,matrix3);
 	}
 	else {
 		printf("The given matrix cannot be multiplied because n's are not the same\nIn a matrix multiplication with order mXn x nXp \n the n's should be same");
