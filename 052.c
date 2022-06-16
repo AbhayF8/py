@@ -17,10 +17,12 @@ You have to write a program that will automatically fill the template.For this, 
 int main() {
 	char template[200]="Thanks {{name}} for purchasing {{item}} from our outlet {{outlet}}. Please visit our outlet {{outlet}} for any kind of problems. We plan to serve you again soon.";
 	char string[15];
+	char string2[15];
 	FILE *ptr=NULL;
 	ptr=fopen("/tmp/template.txt","w");
 	fprintf(ptr,"%s",template);
 	fclose(ptr);
+	
 	char name[20],item[10],outlet[25];
 	printf("Enter your name\n");
 	fgets(name,20,stdin);
@@ -31,24 +33,27 @@ int main() {
 	FILE *ptr1=NULL;
 	ptr1=fopen("/tmp/out.txt","a");
 	ptr=fopen("/tmp/template.txt","r");
-	fscanf(ptr,"%s",string);
-	while (strcmp(string,"\n")!=0) {
-		if (strcmp(string,"{{name}}")==0) {
+	while (strcmp(string,"soon.")!=0) {
+		strcpy(string2,string);
+		if (strncmp(string2,"{{name}}",3)==0) {
 			fprintf(ptr1,"%s ",name);
-			printf("Case 1 is running\n");
+			printf("Case 1\n");
 		}
-		else if(strcpy(string,"{{item}}")==0) {
+		else if(strncpy(string2,"{{item}}",3)==0) {
 			fprintf(ptr1,"%s ",item);
-			printf("Case 2 is running\n");
+			printf("Case 2\n");
 		}
-		else if(strcmp(string,"{{outlet}}")==0) {
+		else if(strncmp(string2,"{{outlet}}",3)==0) {
 			fprintf(ptr1,"%s ",outlet);
-			printf("Case 3 is running\n");
+			printf("Case 3\n");
 		}
 		else {
+			printf("else");
 			fprintf(ptr1,"%s ",string);
 		}
+		printf("%lu ",strlen(string));
 		fscanf(ptr,"%s",string);
+		printf("%lu ",strlen(string2));
 		}
 	fclose(ptr);
 	fclose(ptr1);
