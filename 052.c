@@ -15,46 +15,53 @@ You have to write a program that will automatically fill the template.For this, 
 */
 
 int main() {
+	// first create template.txt
 	char template[200]="Thanks {{name}} for purchasing {{item}} from our outlet {{outlet}}. Please visit our outlet {{outlet}} for any kind of problems. We plan to serve you again soon.";
-	char string[15];
-	char string2[15];
 	FILE *ptr=NULL;
 	ptr=fopen("/tmp/template.txt","w");
 	fprintf(ptr,"%s",template);
 	fclose(ptr);
 	
-	char name[20],item[10],outlet[25];
+	// take input
+	char name[20],item[20],outlet[25];
 	printf("Enter your name\n");
 	fgets(name,20,stdin);
 	printf("What did u bought\n");
-	fgets(item,10,stdin);
+	fgets(item,20,stdin);
 	printf("Enter your outlet\n");
 	fgets(outlet,20,stdin);
+	// fgets add newline character in the last
+	// \n is before null terminating character so strlen(a)-1
+	name[strlen(name)-1]='\0';
+	item[strlen(item)-1]='\0';
+	outlet[strlen(outlet)-1]='\0';
+	
 	FILE *ptr1=NULL;
-	ptr1=fopen("/tmp/out.txt","a");
+	// Read from template.txt and write in out.txt
 	ptr=fopen("/tmp/template.txt","r");
+	ptr1=fopen("/tmp/out.txt","w");
+	char string[20];
 	while (strcmp(string,"soon.")!=0) {
-		strcpy(string2,string);
-		if (strncmp(string2,"{{name}}",3)==0) {
-			fprintf(ptr1,"%s ",name);
-			printf("Case 1\n");
-		}
-		else if(strncpy(string2,"{{item}}",3)==0) {
-			fprintf(ptr1,"%s ",item);
-			printf("Case 2\n");
-		}
-		else if(strncmp(string2,"{{outlet}}",3)==0) {
-			fprintf(ptr1,"%s ",outlet);
-			printf("Case 3\n");
-		}
-		else {
-			printf("else");
-			fprintf(ptr1,"%s ",string);
-		}
-		printf("%lu ",strlen(string));
+		// Get first word and vice versa.
 		fscanf(ptr,"%s",string);
-		printf("%lu ",strlen(string2));
+		if (strcmp(string,"{{name}}")==0) {
+			fprintf(ptr1,"%s ", name);
 		}
+		else if (strcmp(string,"{{item}}")==0) {
+			fprintf(ptr1,"%s ", item);
+		}
+		else if (strcmp(string,"{{outlet}}.")==0) {
+			fprintf(ptr1,"%s. ", outlet);
+		}
+		else if (strcmp(string,"{{outlet}}")==0) {
+			fprintf(ptr1,"%s ", outlet);
+		}
+
+		else {
+			fprintf(ptr1,"%s ", string);
+		}
+	}
+	
 	fclose(ptr);
 	fclose(ptr1);
 }
