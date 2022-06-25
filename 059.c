@@ -31,7 +31,7 @@ float squareroot(float x) {
 }
 
 float Edistance(float x1, float x2, float y1, float y2) {
-	return squareroot((x2-x1)+(y2-y1));
+	return squareroot((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 }
 
 float area(int x1, int x2, int y1, int y2,float (*fptr)(float,float,float,float)) {
@@ -55,4 +55,5 @@ int main(){
 	
 	printf("The area is %f\n",area(a,b,c,d,fptr));
 	printf("The manhattan distance is %d\n",Mdistance(a,b,c,d));
+	printf("The euclidean distance is %f\n",Edistance(a,b,c,d));
 }
